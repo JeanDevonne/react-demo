@@ -1,7 +1,7 @@
 import "./button.css";
-export const ButtonComponent = ({ text, onClick }) => {
+export const ButtonComponent = ({ text, onClick, ...props }) => {
 	return (
-		<button type="submit" onClick={onClick} className="form__button">
+		<button onClick={onClick} className="form__button" {...props}>
 			{text}
 		</button>
 	);

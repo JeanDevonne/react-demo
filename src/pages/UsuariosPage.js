@@ -14,13 +14,14 @@ export const UsuariosPage = () => {
 	const [dataUser, setDataUser] = useState(dataUsuario);
 	const formik = useFormik({
 		initialValues: {
+			id: "",
 			name: "",
 			lastName: "",
 			email: "",
 			age: "",
 		},
 		onSubmit: (value) => {
-			handleSubmit(value);
+			value.id === "" ? handleSubmit(value) : handleUpdateSubmit(value);
 		},
 	});
 
@@ -33,7 +34,67 @@ export const UsuariosPage = () => {
 		};
 		console.log([...dataUser, parameter]);
 
-		setDataUser([...dataUser, parameter]);
+		// setDataUser([...dataUser, parameter]);
+	};
+
+	const handleUpdateSubmit = (value) => {
+		const data = dataUser;
+		// const rpta = data.reduce((ac, el) => {
+		// 	if (el.id === value.id) {
+		// 		el.name = value.name;
+		// 		el.lastName = value.lastName;
+		// 		el.email = value.email;
+		// 		el.age = value.age;
+		// 	}
+		// 	ac.push(el);
+
+		// 	return ac;
+		// }, []);
+		console.log(dataUser);
+
+		let rpta = data.map((el) => {
+			if (el.id === value.id) {
+				el.name = value.name;
+				el.lastName = value.lastName;
+				el.email = value.email;
+				el.age = value.age;
+			}
+
+			return el;
+		});
+
+		console.log(rpta);
+
+		// formik.handleReset();
+	};
+
+	const handleDeleteUsuario = (id) => {
+		const data = dataUser.filter((el) => el.id !== id);
+		setDataUser(data);
+	};
+
+	const handleEditUsuario = (el) => {
+		formik.setFieldValue("id", el.id);
+		formik.setFieldValue("name", el.name);
+		formik.setFieldValue("lastName", el.lastName);
+		formik.setFieldValue("email", el.email);
+		formik.setFieldValue("age", el.age);
+	};
+
+	const handlePrueba = () => {
+		const data = [...dataUser];
+		const rpta = data.map((el) => {
+			if (el.id === 1) {
+				el.name = "Hola";
+				// el.lastName = value.lastName;
+				// el.email = value.email;
+				// el.age = value.age;
+			}
+			return el;
+		});
+
+		console.log(rpta);
+		console.log(data);
 	};
 
 	return (
@@ -43,6 +104,7 @@ export const UsuariosPage = () => {
 					<h1 className="form__title">Registrar Usuario</h1>
 
 					<form autoComplete="off" onSubmit={formik.handleSubmit}>
+						<input type="hidden" name="id" value={formik.values.id} />
 						<InputForm
 							text="Nombre"
 							type="text"
@@ -79,8 +141,11 @@ export const UsuariosPage = () => {
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 						/>
-						<ButtonComponent text="Registrar" />
+						<ButtonComponent
+							text={formik.values.id === "" ? "Registrar" : "Actualizar"}
+						/>
 					</form>
+					<ButtonComponent text="hola" onClick={() => handlePrueba()} />
 				</div>
 
 				<TableComponent>
@@ -94,20 +159,31 @@ export const UsuariosPage = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{dataUser.map((el) => (
-							<tr key={el.id}>
-								<td>{el.name}</td>
-								<td>{el.lastName}</td>
-								<td>{el.email}</td>
-								<td>{el.age}</td>
-								<td>
-									<ButtonComponent
-										onClick={() => alert(el.id)}
-										text="Eliminar"
-									/>
-								</td>
+						{dataUser.length === 0 ? (
+							<tr>
+								<td colSpan={5}>No hay Información</td>
 							</tr>
-						))}
+						) : (
+							dataUser.map((el) => (
+								<tr key={el.id}>
+									<td>{el.name}</td>
+									<td>{el.lastName}</td>
+									<td>{el.email}</td>
+									<td>{el.age}</td>
+									<td>
+										<ButtonComponent
+											onClick={() => handleDeleteUsuario(el.id)}
+											text="Eliminar"
+										/>
+										<ButtonComponent
+											style={{ marginLeft: 5 }}
+											onClick={() => handleEditUsuario(el)}
+											text="Editar"
+										/>
+									</td>
+								</tr>
+							))
+						)}
 					</tbody>
 				</TableComponent>
 			</div>
