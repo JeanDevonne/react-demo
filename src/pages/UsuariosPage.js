@@ -25,7 +25,15 @@ export const UsuariosPage = () => {
 	});
 
 	const handleSubmit = (value) => {
-		console.log(value);
+		const idMax = dataUser.length;
+
+		let parameter = {
+			id: idMax + 1,
+			...value,
+		};
+		console.log([...dataUser, parameter]);
+
+		setDataUser([...dataUser, parameter]);
 	};
 
 	return (
