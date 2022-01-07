@@ -3,4 +3,5 @@
 	margin: 0 auto;
 	display: grid;
 	place-items: center;
+	padding-top: 40px;
 }

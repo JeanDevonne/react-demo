@@ -1,0 +1,17 @@
+.usuario__container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	column-gap: 30px;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.form__title {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.usuario__form form {
+	display: flex;
+	flex-direction: column;
+}

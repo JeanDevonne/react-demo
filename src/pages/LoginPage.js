@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { ButtonComponent } from "../components/Button/buttonComponent";
+import { InputForm } from "../components/Input/input";
 import "../styles/Login.css";
 
 export const LoginPage = () => {
@@ -22,11 +24,8 @@ export const LoginPage = () => {
 					className="form"
 					onSubmit={formik.handleSubmit}
 				>
-					<label htmlFor="email" className="form__label">
-						Email address
-					</label>
-					<input
-						className="form__input"
+					<InputForm
+						text="Email Address"
 						type="email"
 						id="email"
 						placeholder="Email"
@@ -35,11 +34,8 @@ export const LoginPage = () => {
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 					/>
-					<label htmlFor="password" className="form__label">
-						Password
-					</label>
-					<input
-						className="form__input"
+					<InputForm
+						text="Password"
 						type="password"
 						id="password"
 						placeholder="Password"
@@ -48,9 +44,7 @@ export const LoginPage = () => {
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 					/>
-					<button type="submit" className="form__button">
-						Ingresar
-					</button>
+					<ButtonComponent text="Ingresar" />
 				</form>
 			</div>
 		</div>
