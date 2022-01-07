@@ -1,0 +1,19 @@
+.menu {
+	display: flex;
+	width: 100%;
+	background-color: black;
+	justify-content: center;
+}
+.menu__item {
+	padding: 10px;
+	background-color: black;
+}
+
+.menu__link {
+	color: white;
+	cursor: pointer;
+}
+
+.menu__item:hover {
+	background-color: #242424;
+}
