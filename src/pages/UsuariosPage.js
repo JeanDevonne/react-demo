@@ -67,31 +67,6 @@ export const UsuariosPage = () => {
 		formik.setFieldValue("age", el.age);
 	};
 
-	const handlePrueba = () => {
-		// const data = [...dataUser];
-		// const rpta = dataUser.map((el) => {
-		// 	let rObj = {};
-		// 	rObj[el.name] = "Hola";
-		// 	return rObj;
-		// });
-
-		// console.log(rpta);
-		// console.log(dataUser);
-		// formik.handleReset();
-		const rpta = dataUser.reduce((ac, el) => {
-			if (el.id === 1) {
-				ac.push({ name: "HNola" });
-			} else {
-				ac.push(el);
-			}
-
-			return ac;
-		}, []);
-
-		console.log(dataUser);
-		console.log(rpta);
-	};
-
 	return (
 		<ContainerComponent>
 			<div className="usuario__container">
@@ -156,7 +131,6 @@ export const UsuariosPage = () => {
 							</div>
 						)}
 					</form>
-					<ButtonComponent text="hola" onClick={() => handlePrueba()} />
 				</div>
 				<div>
 					<h1 className="form__title">Listar Usuarios</h1>

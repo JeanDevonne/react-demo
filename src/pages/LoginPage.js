@@ -12,7 +12,7 @@ export const LoginPage = () => {
 			password: "",
 		},
 		onSubmit: () => {
-			navigate("/");
+			navigate("/home");
 		},
 	});
 
